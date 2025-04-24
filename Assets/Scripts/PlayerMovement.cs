@@ -4,7 +4,13 @@
 public class PlayerMovement : MonoBehaviour
 {
     public float Speed = 6f;
+    public Transform GroundCheck;
+    public float GroundDistance = 0.4f;
+    public LayerMask GroundMask;
+
     private CharacterController m_Controller;
+    private Vector3 m_Velocity;
+    private bool m_IsGrounded;
 
     private void Awake()
     {
@@ -13,6 +19,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        m_IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
+
+        if (m_IsGrounded && m_Velocity.y < 0f)
+        {
+            m_Velocity.y = -2f;
+        }
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -21,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
         move = IsoVectorConvert(move);
 
         m_Controller.Move(move * Speed * Time.deltaTime);
+
+        m_Velocity.y += Physics.gravity.y * Time.deltaTime;
+        m_Controller.Move(m_Velocity * Time.deltaTime);
     }
 
     private Vector3 IsoVectorConvert(Vector3 vector)
