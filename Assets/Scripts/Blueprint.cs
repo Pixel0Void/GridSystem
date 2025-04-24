@@ -2,12 +2,12 @@
 
 public enum BuildingsEnum
 {
-    Floor, Wall, Window, Door, Remove
+    Floor, Wall, Window, Door, Remove, None
 }
 
 public class Blueprint : MonoBehaviour
 {
-    private BuildingsEnum m_Buildings;
+    [SerializeField] private BuildingsEnum m_Buildings;
     public KeyCode FloorHotkey;
     public KeyCode WallHotkey;
     public KeyCode WindowHotkey;
@@ -18,7 +18,7 @@ public class Blueprint : MonoBehaviour
 
     private void Start()
     {
-        SetTargetObject(BuildingsEnum.Floor);
+        SetTargetObject(BuildingsEnum.None);
     }
 
     public void SetTargetObject()
@@ -45,8 +45,9 @@ public class Blueprint : MonoBehaviour
         }
     }
 
-    private void SetTargetObject(BuildingsEnum building)
+    public void SetTargetObject(BuildingsEnum building)
     {
+        m_Buildings = building;
         SampleObject.SetActive(building);
     }
 }

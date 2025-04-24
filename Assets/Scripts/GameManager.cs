@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
             m_InEditMode = !m_InEditMode;
             m_CameraController.InOutEditMode(m_InEditMode);
             BlueprintPanel.OpenClosePanel(m_InEditMode);
+
+            if (!m_InEditMode)
+                Blueprint.SetTargetObject(BuildingsEnum.None);
         }
 
         if(m_InEditMode)

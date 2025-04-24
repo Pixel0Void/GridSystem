@@ -31,6 +31,8 @@ public class SampleObject : MonoBehaviour
                 break;
             case BuildingsEnum.Remove:
                 break;
+            case BuildingsEnum.None:
+                break;
         }
     }
 }
