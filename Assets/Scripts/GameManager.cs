@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool m_InEditMode = false;
     private CameraController m_CameraController;
     public BlueprintPanel BlueprintPanel;
+    public Blueprint Blueprint;
 
     private void Awake()
     {
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour
             m_InEditMode = !m_InEditMode;
             m_CameraController.InOutEditMode(m_InEditMode);
             BlueprintPanel.OpenClosePanel(m_InEditMode);
+        }
+
+        if(m_InEditMode)
+        {
+            Blueprint.SetTargetObject();
         }
     }
 }
