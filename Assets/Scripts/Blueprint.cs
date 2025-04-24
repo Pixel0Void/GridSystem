@@ -1,49 +1,52 @@
 ﻿using UnityEngine;
 
+public enum BuildingsEnum
+{
+    Floor, Wall, Window, Door, Remove
+}
+
 public class Blueprint : MonoBehaviour
 {
-    public GameObject Floor;
+    private BuildingsEnum m_Buildings;
     public KeyCode FloorHotkey;
-
-    public GameObject Wall;
     public KeyCode WallHotkey;
-
-    public GameObject Window;
     public KeyCode WindowHotkey;
-
-    public GameObject Door;
     public KeyCode DoorHotkey;
-
     public KeyCode RemoveHotkey;
 
-    [SerializeField] private GameObject m_TargetObj;
+    public SampleObject SampleObject;
+
+    private void Start()
+    {
+        SetTargetObject(BuildingsEnum.Floor);
+    }
 
     public void SetTargetObject()
     {
-        if(Input.GetKeyDown(FloorHotkey))
+        if (Input.GetKeyDown(FloorHotkey))
         {
-            SetTargetObject(Floor);
+            SetTargetObject(BuildingsEnum.Floor);
         }
         else if (Input.GetKeyDown(WallHotkey))
         {
-            SetTargetObject(Wall);
+            SetTargetObject(BuildingsEnum.Wall);
         }
         else if (Input.GetKeyDown(WindowHotkey))
         {
-            SetTargetObject(Window);
+            SetTargetObject(BuildingsEnum.Window);
         }
         else if (Input.GetKeyDown(DoorHotkey))
         {
-            SetTargetObject(Door);
+            SetTargetObject(BuildingsEnum.Door);
         }
-        else if(Input.GetKeyDown(RemoveHotkey))
+        else if (Input.GetKeyDown(RemoveHotkey))
         {
-            SetTargetObject(null);
+            SetTargetObject(BuildingsEnum.Remove);
         }
     }
 
-    private void SetTargetObject(GameObject obj)
+    private void SetTargetObject(BuildingsEnum building)
     {
-        m_TargetObj = obj;
+        SampleObject.SetActive(building);
     }
 }
