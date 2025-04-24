@@ -43,6 +43,8 @@ public class Blueprint : MonoBehaviour
         {
             SetTargetObject(BuildingsEnum.Remove);
         }
+
+        SampleObject.Rotate();
     }
 
     public void SetTargetObject(BuildingsEnum building)
