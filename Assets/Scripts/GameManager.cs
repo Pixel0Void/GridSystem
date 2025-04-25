@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     private CameraController m_CameraController;
     public BlueprintPanel BlueprintPanel;
     public Blueprint Blueprint;
+    public BuildSystem BuildSystem;
 
     private void Awake()
     {
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
             m_InEditMode = !m_InEditMode;
             m_CameraController.InOutEditMode(m_InEditMode);
             BlueprintPanel.OpenClosePanel(m_InEditMode);
-
+            
             if (!m_InEditMode)
                 Blueprint.SetTargetObject(BuildingsEnum.None);
         }
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
         if(m_InEditMode)
         {
             Blueprint.SetTargetObject();
+            BuildSystem.EditMode();
         }
     }
 }
