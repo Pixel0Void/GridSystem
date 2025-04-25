@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 124376911935258906}
   - component: {fileID: 5939306607409084543}
   - component: {fileID: 5855917623503931974}
-  - component: {fileID: 1171069803799090517}
-  m_Layer: 0
+  - component: {fileID: 648296145305834948}
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1171069803799090517
+--- !u!65 &648296145305834948
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,8 +91,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.06, y: 0.060000014, z: 0.0015000004}
-  m_Center: {x: 1.5987211e-17, y: -1.0658141e-17, z: 0.0007500002}
+  m_Size: {x: 0.04, y: 0.04000001, z: 0.0010000003}
+  m_Center: {x: 1.0658141e-17, y: -7.105428e-18, z: 0.00050000014}
 --- !u!1 &3455330622294723059
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,9 +102,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2645895877882303305}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

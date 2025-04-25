@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408026498713071988}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4904906413480176651}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b8a215af3caab94e8a2e34113d20caf, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2698728768571470233}
   m_LocalRotation: {x: -0.7071068, y: -0.00000007867459, z: 0.00000003652774, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 3}
+  m_LocalPosition: {x: -0, y: 0, z: 2}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4904906413480176651}
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b8a215af3caab94e8a2e34113d20caf, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4427370500971338933}
   m_LocalRotation: {x: -0.7071068, y: -0.00000007867459, z: 0.00000003652774, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 3}
+  m_LocalPosition: {x: -0, y: 0, z: 2}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4904906413480176651}
@@ -216,7 +216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b8a215af3caab94e8a2e34113d20caf, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -284,10 +284,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7b33522d61a60419cebb02840ad9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Floor: {fileID: 6989043630708799299}
-  m_Wall: {fileID: 2698728768571470233}
-  m_Window: {fileID: 1408026498713071988}
-  m_Door: {fileID: 4427370500971338933}
+  Floor: {fileID: 6989043630708799299}
+  Wall: {fileID: 2698728768571470233}
+  Window: {fileID: 1408026498713071988}
+  Door: {fileID: 4427370500971338933}
+  AccurateColor: {r: 1, g: 1, b: 1, a: 0.49019608}
+  UnaccurateColor: {r: 1, g: 0, b: 0, a: 0.49019608}
 --- !u!1 &6989043630708799299
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0168d697522cca6419d5da86a1e08c0a, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

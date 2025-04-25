@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum BuildingsEnum
 {
@@ -7,7 +8,7 @@ public enum BuildingsEnum
 
 public class Blueprint : MonoBehaviour
 {
-    [SerializeField] private BuildingsEnum m_Buildings;
+    public BuildingsEnum Buildings;
     public KeyCode FloorHotkey;
     public KeyCode WallHotkey;
     public KeyCode WindowHotkey;
@@ -15,6 +16,7 @@ public class Blueprint : MonoBehaviour
     public KeyCode RemoveHotkey;
 
     public SampleObject SampleObject;
+    public event Action OnBuildingsChange;
 
     private void Start()
     {
@@ -49,7 +51,8 @@ public class Blueprint : MonoBehaviour
 
     public void SetTargetObject(BuildingsEnum building)
     {
-        m_Buildings = building;
+        OnBuildingsChange?.Invoke();
+        Buildings = building;
         SampleObject.SetActive(building);
     }
 }
