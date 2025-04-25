@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Grid))]
 public class BuildSystem : MonoBehaviour
 {
+    public int GridSize;
     public LayerMask GroundLayerMask;
     public Blueprint Blueprint;
     public Transform BuildingsParent;
@@ -16,10 +17,12 @@ public class BuildSystem : MonoBehaviour
     public GameObject DoorPrefab;
 
     private bool m_IsAccuratePosition;
+    private Boundary m_Boundary;
 
     private void Awake()
     {
         m_Grid = GetComponent<Grid>();
+        m_Boundary = new Boundary(GridSize, (int)m_Grid.cellSize.x);
     }
 
     public void EditMode()
@@ -66,10 +69,13 @@ public class BuildSystem : MonoBehaviour
     {
         if (Blueprint.Buildings == BuildingsEnum.Floor)
         {
-            return IsOutOfFloor(cellPos);
+            return IsOutOfFloor(cellPos) && m_Boundary.IsInBound(cellPos);
         }
 
-        return IsEmptyNeighborCell(cellPos) && IsEmptyCell(cellPos);
+        if (m_Boundary.IsInBound(cellPos))
+            return IsEmptyNeighborCell(cellPos) && IsEmptyCell(cellPos);
+        else
+            return m_Boundary.IsInBound(GetNeighborCellPosition(cellPos, Blueprint.SampleObject.transform.rotation)) && IsEmptyCell(cellPos);
     }
 
     private bool IsEmptyCell(Vector3 cellPos)
