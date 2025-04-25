@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b8a215af3caab94e8a2e34113d20caf, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b8a215af3caab94e8a2e34113d20caf, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -216,7 +216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b8a215af3caab94e8a2e34113d20caf, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -288,6 +288,8 @@ MonoBehaviour:
   Wall: {fileID: 2698728768571470233}
   Window: {fileID: 1408026498713071988}
   Door: {fileID: 4427370500971338933}
+  AccurateColor: {r: 1, g: 1, b: 1, a: 0.49019608}
+  UnaccurateColor: {r: 1, g: 0, b: 0, a: 0.49019608}
 --- !u!1 &6989043630708799299
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0168d697522cca6419d5da86a1e08c0a, type: 2}
+  - {fileID: 2100000, guid: 405bd90019692e54594496d2a80a4c01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

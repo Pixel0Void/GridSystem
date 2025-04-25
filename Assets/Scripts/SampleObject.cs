@@ -7,7 +7,12 @@ public class SampleObject : MonoBehaviour
     public GameObject Window;
     public GameObject Door;
 
+    public Color AccurateColor;
+    public Color UnaccurateColor;
+
     private bool m_IsEnable;
+    private GameObject m_ActiveObject;
+    private Material m_ActiveObjectMaterial;
 
     public void SetActive(BuildingsEnum building)
     {
@@ -22,28 +27,38 @@ public class SampleObject : MonoBehaviour
         {
             case BuildingsEnum.Floor:
                 Floor.SetActive(true);
+                m_ActiveObject = Floor;
                 break;
             case BuildingsEnum.Wall:
                 Wall.SetActive(true);
+                m_ActiveObject = Wall;
                 break;
             case BuildingsEnum.Window:
                 Window.SetActive(true);
+                m_ActiveObject = Window;
                 break;
             case BuildingsEnum.Door:
                 Door.SetActive(true);
+                m_ActiveObject = Door;
                 break;
             case BuildingsEnum.Remove:
                 m_IsEnable = false;
+                m_ActiveObject = null;
                 break;
             case BuildingsEnum.None:
                 m_IsEnable = false;
+                m_ActiveObject = null;
                 break;
         }
+
+        m_ActiveObjectMaterial = m_ActiveObject?.GetComponent<Renderer>().material;
     }
 
-    public void SetPosition(Vector3 position)
+    public void SetPosition(Vector3 position, bool isAccurate)
     {
         transform.position = position;
+        if (m_ActiveObjectMaterial != null)
+            m_ActiveObjectMaterial.color = (isAccurate ? AccurateColor : UnaccurateColor);
     }
 
     public void Rotate()

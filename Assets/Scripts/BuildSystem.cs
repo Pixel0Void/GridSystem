@@ -15,6 +15,8 @@ public class BuildSystem : MonoBehaviour
     public GameObject WindowPerfab;
     public GameObject DoorPrefab;
 
+    private bool m_IsAccuratePosition;
+
     private void Awake()
     {
         m_Grid = GetComponent<Grid>();
@@ -24,11 +26,12 @@ public class BuildSystem : MonoBehaviour
     {
         Vector3 selectedPosition = GetSelectedMapPosition();
         Vector3Int cellPosition = m_Grid.WorldToCell(selectedPosition);
-        Blueprint.SampleObject.SetPosition(m_Grid.GetCellCenterWorld(cellPosition));
+        m_IsAccuratePosition = IsAcceptableCell(Blueprint.SampleObject.transform.position);
+        Blueprint.SampleObject.SetPosition(m_Grid.GetCellCenterWorld(cellPosition), m_IsAccuratePosition);
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (IsAcceptableCell(Blueprint.SampleObject.transform.position))
+            if (m_IsAccuratePosition)
                 Build();
         }
     }
