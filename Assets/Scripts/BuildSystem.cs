@@ -26,6 +26,7 @@ public class BuildSystem : MonoBehaviour
     {
         m_Grid = GetComponent<Grid>();
         m_Boundary = new Boundary(GridSize, (int)m_Grid.cellSize.x);
+        Blueprint.OnBuildingsChange += ResetLastSelectedObj;
     }
 
     public void EditMode()
@@ -46,7 +47,7 @@ public class BuildSystem : MonoBehaviour
         m_IsAccuratePosition = IsAcceptableCell(Blueprint.SampleObject.transform.position);
         Blueprint.SampleObject.SetPosition(m_Grid.GetCellCenterWorld(cellPosition), m_IsAccuratePosition);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && m_IsAccuratePosition)
         {
             GameObject targetObj = null;
             switch (Blueprint.Buildings)
@@ -84,11 +85,7 @@ public class BuildSystem : MonoBehaviour
         {
             if (m_LastSelectedObjID != hit.transform.parent.GetInstanceID())
             {
-                if (m_LastSelectedObject != null)
-                {
-                    m_LastSelectedObject.material.color = Color.white;
-                    m_LastSelectedObject = null;
-                }
+                ResetLastSelectedObj();
                 m_LastSelectedObject = hit.transform.GetComponentInChildren<MeshRenderer>();
                 m_LastSelectedObject.material.color = Color.red;
                 m_LastSelectedObjID = hit.transform.parent.GetInstanceID();
@@ -96,17 +93,22 @@ public class BuildSystem : MonoBehaviour
         }
         else
         {
-            if (m_LastSelectedObject != null)
-            {
-                m_LastSelectedObject.material.color = Color.white;
-                m_LastSelectedObject = null;
-            }
+            ResetLastSelectedObj();
             m_LastSelectedObjID = 0;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && hit.transform != null)
         {
             Destroy(hit.transform.parent.gameObject);
+        }
+    }
+
+    public void ResetLastSelectedObj()
+    {
+        if (m_LastSelectedObject != null)
+        {
+            m_LastSelectedObject.material.color = Color.white;
+            m_LastSelectedObject = null;
         }
     }
 
@@ -120,7 +122,10 @@ public class BuildSystem : MonoBehaviour
         if (m_Boundary.IsInBound(cellPos))
             return IsEmptyNeighborCell(cellPos) && IsEmptyCell(cellPos);
         else
-            return m_Boundary.IsInBound(GetNeighborCellPosition(cellPos, Blueprint.SampleObject.transform.rotation)) && IsEmptyCell(cellPos);
+        {
+            Vector3 pos = GetNeighborCellPosition(cellPos, Blueprint.SampleObject.transform.rotation);
+            return m_Boundary.IsInBound(pos) && IsEmptyCell(pos, InversedRotation(Blueprint.SampleObject.transform.rotation));
+        }
     }
 
     private bool IsEmptyCell(Vector3 cellPos)
@@ -132,6 +137,21 @@ public class BuildSystem : MonoBehaviour
         foreach (var item in ts)
         {
             if (Mathf.RoundToInt(item.eulerAngles.y) == Mathf.RoundToInt(Blueprint.SampleObject.transform.eulerAngles.y))
+                return false;
+        }
+
+        return true;
+    }
+
+    private bool IsEmptyCell(Vector3 cellPos, Quaternion rotation)
+    {
+        Transform[] ts = BuildingsParent.GetComponentsInChildren<Transform>().Where(x => !x.CompareTag("Floor") && new Vector3(x.localPosition.x, 0f, x.localPosition.z) == cellPos).ToArray();
+        if (ts.Length == 0)
+            return true;
+
+        foreach (var item in ts)
+        {
+            if (Mathf.RoundToInt(item.eulerAngles.y) == Mathf.RoundToInt(rotation.eulerAngles.y))
                 return false;
         }
 
