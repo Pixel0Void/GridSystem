@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum BuildingsEnum
 {
@@ -15,6 +16,7 @@ public class Blueprint : MonoBehaviour
     public KeyCode RemoveHotkey;
 
     public SampleObject SampleObject;
+    public event Action OnBuildingsChange;
 
     private void Start()
     {
@@ -49,6 +51,7 @@ public class Blueprint : MonoBehaviour
 
     public void SetTargetObject(BuildingsEnum building)
     {
+        OnBuildingsChange?.Invoke();
         Buildings = building;
         SampleObject.SetActive(building);
     }
