@@ -284,7 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7b33522d61a60419cebb02840ad9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridPlane: {fileID: 0}
   Floor: {fileID: 6989043630708799299}
   Wall: {fileID: 2698728768571470233}
   Window: {fileID: 1408026498713071988}
