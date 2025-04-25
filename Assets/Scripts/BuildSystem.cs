@@ -6,6 +6,7 @@ public class BuildSystem : MonoBehaviour
 {
     public int GridSize;
     public LayerMask GroundLayerMask;
+    public LayerMask BuildingsLayerMask;
     public Blueprint Blueprint;
     public Transform BuildingsParent;
     private Grid m_Grid;
@@ -18,6 +19,8 @@ public class BuildSystem : MonoBehaviour
 
     private bool m_IsAccuratePosition;
     private Boundary m_Boundary;
+    private MeshRenderer m_LastSelectedObject;
+    private int m_LastSelectedObjID;
 
     private void Awake()
     {
@@ -27,6 +30,17 @@ public class BuildSystem : MonoBehaviour
 
     public void EditMode()
     {
+        if (Blueprint.Buildings == BuildingsEnum.None)
+            return;
+
+        if (Blueprint.Buildings == BuildingsEnum.Remove)
+            Remove();
+
+        Build();
+    }
+
+    private void Build()
+    {
         Vector3 selectedPosition = GetSelectedMapPosition();
         Vector3Int cellPosition = m_Grid.WorldToCell(selectedPosition);
         m_IsAccuratePosition = IsAcceptableCell(Blueprint.SampleObject.transform.position);
@@ -34,34 +48,65 @@ public class BuildSystem : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (m_IsAccuratePosition)
-                Build();
+            GameObject targetObj = null;
+            switch (Blueprint.Buildings)
+            {
+                case BuildingsEnum.Wall:
+                    targetObj = WallPrefab;
+                    break;
+                case BuildingsEnum.Window:
+                    targetObj = WindowPerfab;
+                    break;
+                case BuildingsEnum.Door:
+                    targetObj = DoorPrefab;
+                    break;
+                case BuildingsEnum.Floor:
+                    targetObj = FloorPrefab;
+                    break;
+            }
+
+            if (targetObj != null)
+            {
+                Instantiate(targetObj, Blueprint.SampleObject.transform.position, Blueprint.SampleObject.transform.rotation, BuildingsParent);
+            }
         }
     }
 
-    private void Build()
+    private void Remove()
     {
-        GameObject targetObj = null;
-        switch (Blueprint.Buildings)
+        Vector3 mousPos = Input.mousePosition;
+        mousPos.z = Camera.main.nearClipPlane;
+        Ray ray = Camera.main.ScreenPointToRay(mousPos);
+        RaycastHit hit;
+        Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red);
+
+        if (Physics.Raycast(ray, out hit, 1000, BuildingsLayerMask))
         {
-            case BuildingsEnum.Wall:
-                targetObj = WallPrefab;
-                break;
-            case BuildingsEnum.Window:
-                targetObj = WindowPerfab;
-                break;
-            case BuildingsEnum.Door:
-                targetObj = DoorPrefab;
-                break;
-            case BuildingsEnum.Floor:
-                targetObj = FloorPrefab;
-                break;
+            if (m_LastSelectedObjID != hit.transform.parent.GetInstanceID())
+            {
+                if (m_LastSelectedObject != null)
+                {
+                    m_LastSelectedObject.material.color = Color.white;
+                    m_LastSelectedObject = null;
+                }
+                m_LastSelectedObject = hit.transform.GetComponentInChildren<MeshRenderer>();
+                m_LastSelectedObject.material.color = Color.red;
+                m_LastSelectedObjID = hit.transform.parent.GetInstanceID();
+            }
+        }
+        else
+        {
+            if (m_LastSelectedObject != null)
+            {
+                m_LastSelectedObject.material.color = Color.white;
+                m_LastSelectedObject = null;
+            }
+            m_LastSelectedObjID = 0;
         }
 
-        if (targetObj != null)
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Built");
-            Instantiate(targetObj, Blueprint.SampleObject.transform.position, Blueprint.SampleObject.transform.rotation, BuildingsParent);
+            Destroy(hit.transform.parent.gameObject);
         }
     }
 

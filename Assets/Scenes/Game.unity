@@ -1640,6 +1640,9 @@ MonoBehaviour:
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  BuildingsLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   Blueprint: {fileID: 1134168493}
   BuildingsParent: {fileID: 758546332}
   FloorPrefab: {fileID: 3455330622294723059, guid: 70b9b73f39cda354e9d37b60f5e9d9ce,
