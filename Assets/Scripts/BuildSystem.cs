@@ -4,6 +4,7 @@
 public class BuildSystem : MonoBehaviour
 {
     public LayerMask GroundLayerMask;
+    public Blueprint Blueprint;
     private Grid m_Grid;
 
     private void Awake()
@@ -13,7 +14,9 @@ public class BuildSystem : MonoBehaviour
 
     public void EditMode()
     {
-        GetSelectedMapPosition();
+        Vector3 selectedPosition = GetSelectedMapPosition();
+        Vector3Int cellPosition = m_Grid.WorldToCell(selectedPosition);
+        Blueprint.SampleObject.SetPosition(m_Grid.GetCellCenterWorld(cellPosition));
     }
 
     private Vector3 GetSelectedMapPosition()

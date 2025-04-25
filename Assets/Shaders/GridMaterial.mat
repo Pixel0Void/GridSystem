@@ -24,5 +24,5 @@ Material:
     - Vector1_35108CB5: 0.05
     m_Colors:
     - Color_4C26B355: {r: 0, g: 0, b: 0, a: 1}
-    - Vector2_602CC161: {r: 0.15, g: 0.15, b: 0, a: 0}
+    - Vector2_602CC161: {r: 0.25, g: 0.25, b: 0, a: 0}
     - Vector2_8404BD00: {r: 10, g: 10, b: 0, a: 0}

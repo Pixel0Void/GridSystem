@@ -1,37 +1,36 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SampleObject : MonoBehaviour
 {
-    public GameObject m_Floor;
-    public GameObject m_Wall;
-    public GameObject m_Window;
-    public GameObject m_Door;
+    public GameObject Floor;
+    public GameObject Wall;
+    public GameObject Window;
+    public GameObject Door;
 
     private bool m_IsEnable;
 
     public void SetActive(BuildingsEnum building)
     {
-        m_Floor.SetActive(false);
-        m_Wall.SetActive(false);
-        m_Window.SetActive(false);
-        m_Door.SetActive(false);
+        Floor.SetActive(false);
+        Wall.SetActive(false);
+        Window.SetActive(false);
+        Door.SetActive(false);
 
         m_IsEnable = true;
 
         switch (building)
         {
             case BuildingsEnum.Floor:
-                m_Floor.SetActive(true);
+                Floor.SetActive(true);
                 break;
             case BuildingsEnum.Wall:
-                m_Wall.SetActive(true);
+                Wall.SetActive(true);
                 break;
             case BuildingsEnum.Window:
-                m_Window.SetActive(true);
+                Window.SetActive(true);
                 break;
             case BuildingsEnum.Door:
-                m_Door.SetActive(true);
+                Door.SetActive(true);
                 break;
             case BuildingsEnum.Remove:
                 m_IsEnable = false;
@@ -40,6 +39,11 @@ public class SampleObject : MonoBehaviour
                 m_IsEnable = false;
                 break;
         }
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
 
     public void Rotate()

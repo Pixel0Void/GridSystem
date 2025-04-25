@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public BlueprintPanel BlueprintPanel;
     public Blueprint Blueprint;
     public BuildSystem BuildSystem;
+    public GameObject GridPlane;
 
     private void Awake()
     {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
             m_InEditMode = !m_InEditMode;
             m_CameraController.InOutEditMode(m_InEditMode);
             BlueprintPanel.OpenClosePanel(m_InEditMode);
+
+            GridPlane.SetActive(m_InEditMode);
             
             if (!m_InEditMode)
                 Blueprint.SetTargetObject(BuildingsEnum.None);
