@@ -7,7 +7,7 @@ public enum BuildingsEnum
 
 public class Blueprint : MonoBehaviour
 {
-    [SerializeField] private BuildingsEnum m_Buildings;
+    public BuildingsEnum Buildings;
     public KeyCode FloorHotkey;
     public KeyCode WallHotkey;
     public KeyCode WindowHotkey;
@@ -49,7 +49,7 @@ public class Blueprint : MonoBehaviour
 
     public void SetTargetObject(BuildingsEnum building)
     {
-        m_Buildings = building;
+        Buildings = building;
         SampleObject.SetActive(building);
     }
 }

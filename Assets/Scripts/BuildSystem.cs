@@ -1,11 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 [RequireComponent(typeof(Grid))]
 public class BuildSystem : MonoBehaviour
 {
     public LayerMask GroundLayerMask;
     public Blueprint Blueprint;
+    public Transform BuildingsParent;
     private Grid m_Grid;
+
+    [Space(20)]
+    public GameObject FloorPrefab;
+    public GameObject WallPrefab;
+    public GameObject WindowPerfab;
+    public GameObject DoorPrefab;
 
     private void Awake()
     {
@@ -17,6 +25,85 @@ public class BuildSystem : MonoBehaviour
         Vector3 selectedPosition = GetSelectedMapPosition();
         Vector3Int cellPosition = m_Grid.WorldToCell(selectedPosition);
         Blueprint.SampleObject.SetPosition(m_Grid.GetCellCenterWorld(cellPosition));
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (IsAcceptableCell(Blueprint.SampleObject.transform.position))
+                Build();
+        }
+    }
+
+    private void Build()
+    {
+        GameObject targetObj = null;
+        switch (Blueprint.Buildings)
+        {
+            case BuildingsEnum.Wall:
+                targetObj = WallPrefab;
+                break;
+            case BuildingsEnum.Window:
+                targetObj = WindowPerfab;
+                break;
+            case BuildingsEnum.Door:
+                targetObj = DoorPrefab;
+                break;
+            case BuildingsEnum.Floor:
+                targetObj = FloorPrefab;
+                break;
+        }
+
+        if (targetObj != null)
+        {
+            Debug.Log("Built");
+            Instantiate(targetObj, Blueprint.SampleObject.transform.position, Blueprint.SampleObject.transform.rotation, BuildingsParent);
+        }
+    }
+
+    private bool IsAcceptableCell(Vector3 cellPos)
+    {
+        if (Blueprint.Buildings == BuildingsEnum.Floor)
+        {
+            return IsOutOfFloor(cellPos);
+        }
+
+        return IsEmptyNeighborCell(cellPos) && IsEmptyCell(cellPos);
+    }
+
+    private bool IsEmptyCell(Vector3 cellPos)
+    {
+        Transform[] ts = BuildingsParent.GetComponentsInChildren<Transform>().Where(x => !x.CompareTag("Floor") && new Vector3(x.localPosition.x, 0f, x.localPosition.z) == cellPos).ToArray();
+        if (ts.Length == 0)
+            return true;
+
+        foreach (var item in ts)
+        {
+            if (Mathf.RoundToInt(item.eulerAngles.y) == Mathf.RoundToInt(Blueprint.SampleObject.transform.eulerAngles.y))
+                return false;
+        }
+
+        return true;
+    }
+
+    private bool IsEmptyNeighborCell(Vector3 cellPos)
+    {
+        Vector3 neighborCellPos = GetNeighborCellPosition(cellPos, Blueprint.SampleObject.transform.rotation);
+        Transform[] neighborCell = BuildingsParent.GetComponentsInChildren<Transform>().Where(x => !x.CompareTag("Floor") && new Vector3(x.localPosition.x, 0f, x.localPosition.z) == neighborCellPos).ToArray();
+
+        foreach (var item in neighborCell)
+        {
+            if (Mathf.RoundToInt(item.eulerAngles.y) == Mathf.RoundToInt(InversedRotation(Blueprint.SampleObject.transform.rotation).eulerAngles.y))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsOutOfFloor(Vector3 cellPos)
+    {
+        Transform ts = BuildingsParent.GetComponentsInChildren<Transform>().Where(x => x.CompareTag("Floor") && new Vector3(x.localPosition.x, 0f, x.localPosition.z) == cellPos).FirstOrDefault();
+        return ts == null;
     }
 
     private Vector3 GetSelectedMapPosition()
@@ -28,11 +115,55 @@ public class BuildSystem : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red);
 
-        if(Physics.Raycast(ray, out hit, 1000, GroundLayerMask))
+        if (Physics.Raycast(ray, out hit, 1000, GroundLayerMask))
         {
             pos = hit.point;
         }
 
         return pos;
+    }
+
+    private Quaternion InversedRotation(Quaternion rot)
+    {
+        float yRotation = rot.eulerAngles.y;
+        Quaternion res = Quaternion.identity;
+        switch (yRotation)
+        {
+            case 0f:
+                res = Quaternion.Euler(Vector3.up * 180f);
+                break;
+            case 90f:
+                res = Quaternion.Euler(Vector3.up * -90f);
+                break;
+            case 180f:
+                res = Quaternion.Euler(0f, 0f, 0f);
+                break;
+            case 270f:
+                res = Quaternion.Euler(Vector3.up * 90f);
+                break;
+        }
+        return res;
+    }
+
+    private Vector3 GetNeighborCellPosition(Vector3 cellPosition, Quaternion rotation)
+    {
+        float dir = rotation.eulerAngles.y;
+        Vector3 neighborCellPos = Vector3.zero;
+        switch (dir)
+        {
+            case 0f:
+                neighborCellPos = cellPosition + (Vector3.forward * m_Grid.cellSize.z);
+                break;
+            case 90f:
+                neighborCellPos = cellPosition + (Vector3.right * m_Grid.cellSize.x);
+                break;
+            case 180f:
+                neighborCellPos = cellPosition + (Vector3.back * m_Grid.cellSize.z);
+                break;
+            case 270f:
+                neighborCellPos = cellPosition + (Vector3.left * m_Grid.cellSize.x);
+                break;
+        }
+        return neighborCellPos;
     }
 }
