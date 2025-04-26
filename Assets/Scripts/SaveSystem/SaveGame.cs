@@ -34,6 +34,6 @@ public class SaveGame : MonoBehaviour
             data.Add(new SaveData(t.name, (int)t.position.x, (int)t.position.z, t.rotation.eulerAngles.y));
         }
 
-        Debug.Log(SaveSystem.Save("BuildingsData", data));
+        SaveSystem.Save("BuildingsData", data);
     }
 }
