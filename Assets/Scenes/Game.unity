@@ -1549,6 +1549,7 @@ GameObject:
   - component: {fileID: 1134168492}
   - component: {fileID: 1134168491}
   - component: {fileID: 1134168493}
+  - component: {fileID: 1134168494}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1606,6 +1607,20 @@ MonoBehaviour:
   DoorHotkey: 52
   RemoveHotkey: 53
   SampleObject: {fileID: 1147988892}
+--- !u!114 &1134168494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134168490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2049f94e1e638cb47a3dbdcbe092fb0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingsParent: {fileID: 758546332}
+  Buildings: {fileID: 11400000, guid: c278e272c9ca5534db0658f569899787, type: 2}
 --- !u!1 &1139344338
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94c219a0537f664e95bccb0b4d33c7e, type: 3}
   m_Name: BuildingsRefrencess
   m_EditorClassIdentifier: 
-  FloorPrefab: {fileID: 0}
-  WallPrefab: {fileID: 0}
-  WindowPrefab: {fileID: 0}
-  DoorPrefab: {fileID: 0}
+  FloorPrefab: {fileID: 3455330622294723059, guid: 70b9b73f39cda354e9d37b60f5e9d9ce,
+    type: 3}
+  WallPrefab: {fileID: 3759368696699967547, guid: bb1e2d129008500468edffcef792435c,
+    type: 3}
+  WindowPrefab: {fileID: 8127636652351378008, guid: 78afbfc8a4eaa26448f5b1eccbf3e476,
+    type: 3}
+  DoorPrefab: {fileID: 6378361724721991848, guid: 5ee350a567d44cc438a83d046228733d,
+    type: 3}
