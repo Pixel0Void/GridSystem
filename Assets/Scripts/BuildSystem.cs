@@ -121,7 +121,7 @@ public class BuildSystem : MonoBehaviour
         else
         {
             Vector3 pos = GetNeighborCellPosition(cellPos, Blueprint.SampleObject.transform.rotation);
-            return m_Boundary.IsInBound(pos) && IsEmptyCell(pos, InversedRotation(Blueprint.SampleObject.transform.rotation));
+            return m_Boundary.IsInBound(pos) && IsEmptyNeighborCell(cellPos) && IsEmptyCell(cellPos);
         }
     }
 
@@ -134,21 +134,6 @@ public class BuildSystem : MonoBehaviour
         foreach (var item in ts)
         {
             if (Mathf.RoundToInt(item.eulerAngles.y) == Mathf.RoundToInt(Blueprint.SampleObject.transform.eulerAngles.y))
-                return false;
-        }
-
-        return true;
-    }
-
-    private bool IsEmptyCell(Vector3 cellPos, Quaternion rotation)
-    {
-        Transform[] ts = BuildingsParent.GetComponentsInChildren<Transform>().Where(x => !x.CompareTag("Floor") && new Vector3(x.localPosition.x, 0f, x.localPosition.z) == cellPos).ToArray();
-        if (ts.Length == 0)
-            return true;
-
-        foreach (var item in ts)
-        {
-            if (Mathf.RoundToInt(item.eulerAngles.y) == Mathf.RoundToInt(rotation.eulerAngles.y))
                 return false;
         }
 
