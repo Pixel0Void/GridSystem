@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6885652852446924812}
   - component: {fileID: 6885652852446924813}
   - component: {fileID: 6885652852446924818}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 6885652853111512449}
   - component: {fileID: 6885652853111512451}
   - component: {fileID: 6885652853111512448}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6885652853368158435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
