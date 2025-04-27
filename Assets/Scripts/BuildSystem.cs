@@ -65,7 +65,7 @@ public class BuildSystem : MonoBehaviour
 
             if (targetObj != null)
             {
-                Instantiate(targetObj, Blueprint.SampleObject.transform.position, Blueprint.SampleObject.transform.rotation, BuildingsParent);
+                Instantiate(targetObj, Blueprint.SampleObject.transform.position, Blueprint.SampleObject.transform.rotation, BuildingsParent).AddComponent<BuiltEffect>();
             }
         }
     }
