@@ -2,7 +2,7 @@
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private bool m_InEditMode = false;
+    private bool m_InEditMode = false;
     private CameraController m_CameraController;
     private PlayerMovement m_Player;
     public BlueprintPanel BlueprintPanel;
