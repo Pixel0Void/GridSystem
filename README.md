@@ -15,13 +15,13 @@ Players can interactively place and remove modular elements like walls and floor
 - 🖱️ Mouse-based interaction for placing and removing objects
 - 🧭 Isometric camera angle with 3D perspective
 - 🧰 UI tool selection (tileset switching)
--      Save game status using JSON
+- Save game status using JSON
 
 ## 📸 Screenshots
 
-| Build Mode | Preview |
-|------------|---------|
-| ![Build 1](Screenshots/Gameplay1.jpg) | ![Build 2](Screenshots/Gameplay2.jpg) |
+- ![](Screenshots/Gameplay1.jpg)
+- ![](Screenshots/Gameplay2.jpg)
+- ![](Screenshots/Gameplay3.jpg)
 
 ## 🚀 Getting Started
 
@@ -37,8 +37,9 @@ Players can interactively place and remove modular elements like walls and floor
    ```
 2. Open the project in Unity Hub.
 3. Launch the `Game` scene
-4. Use the on-screen UI or number keys `1–5` to select different build parts.
-5. Click on the scene to place or remove objects.
+4. Use `Tab` key for edit
+5. Use the on-screen UI or number keys `1–5` to select different build parts.
+6. Click on the scene to place or remove objects.
 
 ## 📌 Disclaimer
 
