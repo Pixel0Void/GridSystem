@@ -15,7 +15,7 @@ Players can interactively place and remove modular elements like walls and floor
 - 🖱️ Mouse-based interaction for placing and removing objects
 - 🧭 Isometric camera angle with 3D perspective
 - 🧰 UI tool selection (tileset switching)
-- Save game status using JSON
+- 💾 Save game status using JSON
 
 ## 📸 Screenshots
 
